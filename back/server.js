@@ -1,11 +1,12 @@
-const express = require("express");
-const userRoutes = require("./routes/userRoutes.js");
-const sauceRoutes = require("./routes/sauceRoutes.js");
-require("dotenv").config({ path: "./config/.env" });
-const path = require("path");
-require("./config/db");
+import express from "express";
+import userRoutes from "./routes/userRoutes.js";
+//const sauceRoutes = require("./routes/sauceRoutes.js");
+//require("dotenv").config({ path: "./config/.env" });
+import path from "path";
+import db from "./config/db.js";
 
-const cors = require("cors");
+import cors from "cors";
+
 const app = express();
 app.use("/images", express.static(path.join("./images")));
 app.use(express.json());
@@ -16,11 +17,15 @@ app.use(
   })
 );
 //routes
-app.use("/api/auth", userRoutes);
+app.use("/", userRoutes);
 
-app.use("/api", sauceRoutes);
+//app.use("/api", sauceRoutes);
 
 //server
-app.listen(process.env.PORT, () => {
-  console.log(`listening on port ${process.env.PORT}`);
+db.sync()
+  .then(console.log("connection  à la base de donnée reussi"))
+  .catch((error) => console.log(error));
+
+app.listen(3000, () => {
+  console.log(`listening on port 3000`);
 });

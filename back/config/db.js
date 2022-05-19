@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
-mongoose
-  .connect(process.env.DB_ADRESS, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.log("Failed to connect to MongoDB", err));
+import Sequelize from "sequelize";
+const db = new Sequelize("p7", "root", "", {
+  host: "localhost",
+  dialect: "mysql",
+  port: "3306",
+});
+
+export default db;

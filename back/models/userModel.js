@@ -1,41 +1,72 @@
-const mongoose = require("mongoose");
-const { isEmail } = require("validator");
-const bcrypt = require("bcrypt");
+import bcrypt from "bcrypt";
+import { Sequelize, DataTypes } from "sequelize";
+const sequelize = new Sequelize("sqlite::memory:");
 
-const userSchema = new mongoose.Schema({
+const User = sequelize.define("User", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false,
+  },
   email: {
-    type: String,
-    required: true,
-    validate: [isEmail],
-    lowercase: true,
+    type: DataTypes.STRING,
+    allowNull: false,
     unique: true,
-    trim: true,
+    validate: {
+      isEmail: true,
+      isLowercase: true,
+    },
   },
   password: {
-    type: String,
-    required: true,
-    max: 1024,
-    minlength: 6,
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      len: [6, 1024],
+    },
+  },
+  pseudo: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      isLowercase: true,
+      len: [3, 15],
+    },
+  },
+  bio: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+      len: [1, 1024],
+    },
+  },
+  imageUrl: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+      len: [0, 1024],
+    },
   },
 });
 
 //play function before save into DB
-userSchema.pre("save", async function (next) {
-  const salt = await bcrypt.genSalt();
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
 
-userSchema.statics.signIn = async function (email, password) {
-  const user = await this.findOne({ email });
-  if (user) {
-    const auth = await bcrypt.compare(password, user.password);
-    if (auth) {
-      return user;
-    }
-    throw Error("incorrect password");
-  }
-  throw Error("incorrect email");
-};
-const UserModel = mongoose.model("user", userSchema);
-module.exports = UserModel;
+User.beforeCreate(async (user, options) => {
+  const salt = await bcrypt.genSalt();
+  user.password = await bcrypt.hash(user.password, salt);
+});
+User.sync();
+// userSchema.statics.signIn = async function (email, password) {
+//   const user = await this.findOne({ email });
+//   if (user) {
+//     const auth = await bcrypt.compare(password, user.password);
+//     if (auth) {
+//       return user;
+//     }
+//     throw Error("incorrect password");
+//   }
+//   throw Error("incorrect email");
+// };
+
+export default User;
