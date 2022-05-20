@@ -1,5 +1,5 @@
 import UserModel from "../models/userModel.js";
-
+import signUpErrors from "../utils/errorUtils.js";
 import jwt from "jsonwebtoken";
 
 const signUp = async (req, res) => {
@@ -7,12 +7,13 @@ const signUp = async (req, res) => {
 
   try {
     const user = UserModel.build({ email, password, pseudo });
-    console.log(user);
-    await user.save();
+
+    console.log(await user.save());
 
     res.status(201).json({ message: "inscription reussi" });
   } catch (err) {
-    res.status(400).send("Bad Request");
+    const errors = signUpErrors(err);
+    res.status(400).send({ errors });
   }
 };
 

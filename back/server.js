@@ -22,7 +22,7 @@ app.use("/", userRoutes);
 //app.use("/api", sauceRoutes);
 
 //server
-db.sync()
+db.sync({ force: false, alter: false })
   .then(console.log("connection  à la base de donnée reussi"))
   .catch((error) => console.log(error));
 

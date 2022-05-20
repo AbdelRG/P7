@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 import "../../public/assets/style/index.scss";
 import { Form, Button } from "react-bootstrap";
-
+import signupFecth from "../apiCall/signupCall";
 const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [pseudo, setPseudo] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const body = { email, pseudo, password };
-    fetch("http://localhost:3000/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    }).then(() => {
-      console.log("compte créer");
-    });
+    await signupFecth(body);
   };
 
   return (

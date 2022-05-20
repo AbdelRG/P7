@@ -1,8 +1,4 @@
 import Sequelize from "sequelize";
-const db = new Sequelize("p7", "root", "", {
-  host: "localhost",
-  dialect: "mysql",
-  port: "3306",
-});
+const db = new Sequelize("sqlite://p7.db");
 
 export default db;

@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { Sequelize, DataTypes } from "sequelize";
-const sequelize = new Sequelize("sqlite::memory:");
+import sequelize from "../config/db.js";
 
 const User = sequelize.define("User", {
   id: {
@@ -56,7 +56,7 @@ User.beforeCreate(async (user, options) => {
   const salt = await bcrypt.genSalt();
   user.password = await bcrypt.hash(user.password, salt);
 });
-User.sync();
+
 // userSchema.statics.signIn = async function (email, password) {
 //   const user = await this.findOne({ email });
 //   if (user) {
