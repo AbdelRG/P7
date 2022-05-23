@@ -6,10 +6,22 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [pseudo, setPseudo] = useState("");
   const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = { email, pseudo, password };
-    await signupFecth(body);
+    const response = await signupFecth(body);
+    console.log(response);
+
+    if (response.email != "") {
+      setErrMsg(response.email);
+    }
+    if (response.pseudo != "") {
+      setErrMsg(response.pseudo);
+    }
+    if (response.password != "") {
+      setErrMsg(response.password);
+    }
   };
 
   return (
@@ -45,6 +57,7 @@ const SignupForm = () => {
       <Button variant="dark" type="submit" onClick={handleSubmit}>
         S'inscrire
       </Button>
+      <p className="errorMsg">{errMsg}</p>
     </Form>
   );
 };

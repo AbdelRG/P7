@@ -1,22 +1,14 @@
 const signupFecth = async (body) => {
-  await fetch("http://localhost:3000/", {
+  return await fetch(`http://localhost:3000/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   })
-    .then(function (res) {
-      console.log(
-        res.json((body) => {
-          console.log(body);
-        })
-      );
-
-      if (res.status == 400) {
-      }
+    .then((response) => response.json())
+    .then((response) => {
+      return response.errors;
     })
-    .catch(function (err) {
-      throw err;
-    });
+    .catch((err) => console.error(err));
 };
 
 export default signupFecth;
