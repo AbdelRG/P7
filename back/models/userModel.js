@@ -57,16 +57,17 @@ User.beforeCreate(async (user, options) => {
   user.password = await bcrypt.hash(user.password, salt);
 });
 
-// userSchema.statics.signIn = async function (email, password) {
-//   const user = await this.findOne({ email });
-//   if (user) {
-//     const auth = await bcrypt.compare(password, user.password);
-//     if (auth) {
-//       return user;
-//     }
-//     throw Error("incorrect password");
-//   }
-//   throw Error("incorrect email");
-// };
+User.prototype.signIn = async (email, password) => {
+  const user = await User.findOne({ where: { email: email } });
+
+  if (user) {
+    const auth = await bcrypt.compare(password, user.password);
+    if (auth) {
+      return user;
+    }
+    throw Error("incorrect password");
+  }
+  throw Error("incorrect email");
+};
 
 export default User;

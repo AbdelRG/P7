@@ -3,6 +3,7 @@ import SignupForm from "../components/SignupForm";
 import Logo from "../../public/assets/images/icon-left-font-monochrome-black.png";
 import { NavLink } from "react-bootstrap";
 import Footer from "../components/Footer";
+import LoginForm from "../components/LoginForm";
 
 const Home = () => {
   return (
@@ -11,14 +12,8 @@ const Home = () => {
         <img className="logo" src={Logo} alt="logo groupomania" />
         <div className="signupForm-container">
           <SignupForm />
-          <NavLink
-            className="loginLink"
-            to="/login"
-            href="/login"
-            title="lien vers la page de connexion"
-          >
-            Vous avez déja un compte ?
-          </NavLink>
+
+          <LoginForm />
         </div>
       </div>
       <Footer />

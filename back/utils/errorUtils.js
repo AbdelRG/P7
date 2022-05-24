@@ -18,4 +18,11 @@ const signUpErrors = (err) => {
   return errors;
 };
 
-export default signUpErrors;
+const loginErrors = (err) => {
+  let errors = { error: "" };
+  if (err.message.includes("password") | err.message.includes("email"))
+    errors.error = "Email ou mot de passe incorrect";
+  return errors;
+};
+
+export { signUpErrors, loginErrors };

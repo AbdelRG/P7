@@ -1,5 +1,5 @@
 import UserModel from "../models/userModel.js";
-import signUpErrors from "../utils/errorUtils.js";
+import { signUpErrors, loginErrors } from "../utils/errorUtils.js";
 import jwt from "jsonwebtoken";
 
 const signUp = async (req, res) => {
@@ -17,20 +17,23 @@ const signUp = async (req, res) => {
   }
 };
 
-// const createToken = (id) => {
-//   return jwt.sign({ id }, process.env.TOKEN_SECRET, { expiresIn: "1h" });
-// };
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.TOKEN_SECRET, { expiresIn: "1h" });
+};
 
-// module.exports.login = async (req, res) => {
-//   const { email, password } = req.body;
+const login = async (req, res) => {
+  const { email, password } = req.body;
 
-//   try {
-//     const user = await UserModel.signIn(email, password);
-//     const token = createToken(user._id);
+  try {
+    const user = await UserModel.prototype.signIn(email, password);
+    const token = createToken(user.id);
 
-//     res.status(200).json({ userId: user._id, token: token });
-//   } catch (err) {
-//     res.status(400).send("Bad Request");
-//   }
-// };
-export default signUp;
+    res.status(200).json({ userId: user.id, token: token });
+  } catch (err) {
+    const errors = loginErrors(err);
+
+    res.status(400).send({ errors });
+  }
+};
+
+export { signUp, login };

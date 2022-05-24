@@ -1,9 +1,12 @@
 import express from "express";
 import userRoutes from "./routes/userRoutes.js";
 //const sauceRoutes = require("./routes/sauceRoutes.js");
-//require("dotenv").config({ path: "./config/.env" });
 import path from "path";
+import dotenv from "dotenv";
+dotenv.config({ path: "./config/.env" });
+
 import db from "./config/db.js";
+import { login } from "./controllers/authController.js";
 
 import cors from "cors";
 
@@ -18,7 +21,7 @@ app.use(
 );
 //routes
 app.use("/", userRoutes);
-
+app.use("/login", login);
 //app.use("/api", sauceRoutes);
 
 //server
@@ -26,6 +29,6 @@ db.sync({ force: false, alter: false })
   .then(console.log("connection  à la base de donnée reussi"))
   .catch((error) => console.log(error));
 
-app.listen(3000, () => {
-  console.log(`listening on port 3000`);
+app.listen(process.env.PORT, () => {
+  console.log(`listening on port ${process.env.PORT}`);
 });

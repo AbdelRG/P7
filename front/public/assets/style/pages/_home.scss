@@ -23,15 +23,17 @@
             height: 25%;
             padding-left: 30px;
             
-           
+           .errorMsg{
+               margin-top: 10px;
+               color:red;
+           }
          
            
         }
-        .loginLink{
-            color: black;
-            padding-top: 20px;
-            padding-bottom: 20px;
+        .buttonConnect{
+            padding-left: 10px;
+            margin-left: 30px;
         }
-
+        
     }
 }

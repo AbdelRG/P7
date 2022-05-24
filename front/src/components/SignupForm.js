@@ -11,7 +11,6 @@ const SignupForm = () => {
     e.preventDefault();
     const body = { email, pseudo, password };
     const response = await signupFecth(body);
-    console.log(response);
 
     if (response.email != "") {
       setErrMsg(response.email);
