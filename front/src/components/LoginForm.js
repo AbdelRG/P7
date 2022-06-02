@@ -17,10 +17,10 @@ const LoginForm = () => {
     const body = { email, password };
     const response = await loginFecth(body);
 
-    if ((response.status = 400)) {
+    if (response.status === 400) {
       setErrMsg("email ou mdp incorrect");
     }
-    if ((response.status = 200)) {
+    if (response.status === 200) {
       navigate("/login");
     }
   };
@@ -56,6 +56,7 @@ const LoginForm = () => {
               />
             </Form.Group>
           </Form>
+          <p className="errorMsg">{errMsg}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>
@@ -64,7 +65,6 @@ const LoginForm = () => {
           <Button variant="dark" onClick={handleSubmit}>
             Connexion
           </Button>
-          <p className="errorMsg">{errMsg}</p>
         </Modal.Footer>
       </Modal>
     </>

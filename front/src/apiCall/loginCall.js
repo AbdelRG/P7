@@ -11,6 +11,7 @@ const loginFecth = async (body) => {
     })
     .then((response) => {
       responseStatus.response = response;
+      localStorage.setItem("token", "Bearer " + response.token);
       return responseStatus;
     })
     .catch((err) => console.error(err));
