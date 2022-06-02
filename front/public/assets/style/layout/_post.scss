@@ -1,0 +1,54 @@
+.postContainer{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    height: 500px;
+    background-color: white;
+    
+    margin-bottom: 50px;
+    margin-top: 50px;
+    border-radius: 2px 2px 2px 2px;
+    &:hover{
+        border: solid black 0.2px;
+    }
+                 
+    padding: 20px;
+    .postUserInfo{
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        padding-bottom: 20px;
+        .userPseudo{
+            font-weight: bold;
+        }
+        .profilePicContainer{
+            padding-right:5px ;
+            .profilePic{
+                object-fit: cover;
+                 max-height: 50px;
+                 border-radius: 50%;
+                 border: solid  0.5px;
+                 
+            }
+        }
+    }
+    .postContent{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+        .postPic{
+            object-fit: cover;
+            max-height: 175px;
+            width: 350px;
+        }
+        .postText{
+            font-weight: bold ;
+        }
+    }
+
+    .postInfo{
+        display: flex;
+        justify-content: space-evenly;
+    }
+}

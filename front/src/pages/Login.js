@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import NavigationBar from "../components/NavigationBar";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
+import Post from "../components/Post";
 
 const useAuth = () => {
   const token = localStorage.getItem("token");
@@ -25,9 +26,8 @@ const Login = () => {
     return (
       <>
         <NavigationBar />
-        <div>
-          <h2>POST</h2>
-          <h3>POST</h3>
+        <div className="login">
+          <Post />
         </div>
         <Footer />
       </>

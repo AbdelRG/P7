@@ -28,8 +28,8 @@ const NavigationBar = () => {
           <Navbar.Brand href="#home">Groupomania</Navbar.Brand>
           <Nav className="me-auto navBar">
             <Nav.Link href="#home">Acceuil</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link href="#features">Publier</Nav.Link>
+
             <Container className="navBarDropdown">
               <NavDropdown
                 id="nav-dropdown-dark-example"
