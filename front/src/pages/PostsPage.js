@@ -4,6 +4,7 @@ import NavigationBar from "../components/NavigationBar";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import Post from "../components/Post";
+import PostForm from "../components/PostForm";
 
 const useAuth = () => {
   const token = localStorage.getItem("token");
@@ -14,7 +15,7 @@ const useAuth = () => {
   }
 };
 
-const Login = () => {
+const PostsPage = () => {
   const navigate = useNavigate();
   const log = useAuth();
 
@@ -27,6 +28,8 @@ const Login = () => {
       <>
         <NavigationBar />
         <div className="login">
+          <PostForm />
+          <Post />
           <Post />
         </div>
         <Footer />
@@ -34,4 +37,4 @@ const Login = () => {
     );
   }
 };
-export default Login;
+export default PostsPage;

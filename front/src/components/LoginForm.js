@@ -21,7 +21,7 @@ const LoginForm = () => {
       setErrMsg("email ou mdp incorrect");
     }
     if (response.status === 200) {
-      navigate("/login");
+      navigate("/postsPage");
     }
   };
 
