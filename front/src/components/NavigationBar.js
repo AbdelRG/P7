@@ -27,7 +27,7 @@ const NavigationBar = () => {
         <Container>
           <Navbar.Brand href="#home">Groupomania</Navbar.Brand>
           <Nav className="me-auto navBar">
-            <Nav.Link href="#home">Acceuil</Nav.Link>
+            <Nav.Link href="#home">Accueil</Nav.Link>
 
             <Container className="navBarDropdown">
               <NavDropdown

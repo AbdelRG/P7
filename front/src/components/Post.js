@@ -5,8 +5,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import { faComments } from "@fortawesome/free-solid-svg-icons";
+import getUserById from "../apiCall/getUserById";
+import React, { useEffect } from "react";
+import React, { useState } from "react";
 
-const Post = () => {
+const Post = (props) => {
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    getUserById(props.post.userId).then((res) => {
+      setUser(res.user);
+    });
+  }, []);
+
   return (
     <>
       <div className="postContainer">
@@ -18,15 +28,11 @@ const Post = () => {
               alt="image de profil"
             />
           </div>
-          <p className="userPseudo">Pseudonyme</p>
+          <p className="userPseudo">{user.pseudo}</p>
         </div>
         <div className="postContent">
-          <h4 className="postTitle">Post title</h4>
-          <p className="postText">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          </p>
+          <h4 className="postTitle">{props.post.title}</h4>
+          <p className="postText">{props.post.text}</p>
           <img className="postPic" src={PostPic} alt="image du post" />
         </div>
         <div className="postInfo">

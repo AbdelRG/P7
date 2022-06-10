@@ -1,10 +1,15 @@
-import PostModel from "../models/postModel";
+import PostModel from "../models/postModel.js";
 
 const setPost = async (req, res) => {
-  const postBody = JSON.parse(req.body.post);
-  const { title, text } = postBody;
+  const title = req.body.title;
+  const text = req.body.text;
   const userId = req.user.id;
-  const imageUrl = "http://localhost:3000/" + req.file.path;
+  console.log(req.file);
+
+  let imageUrl = "";
+  if (req.file !== undefined) {
+    imageUrl = "http://localhost:3000/" + req.file.path;
+  }
   const post = PostModel.build({
     title: title,
     text: text,
@@ -16,8 +21,14 @@ const setPost = async (req, res) => {
 
     res.status(201).json({ message: "post upload" });
   } catch (err) {
+    console.log(err);
     res.status(500).send("INTERNAL SERVER ERROR");
   }
 };
 
-export { setPost };
+const getAllPost = async (req, res) => {
+  const post = await PostModel.findAll();
+  res.status(200).send(post);
+};
+
+export { setPost, getAllPost };

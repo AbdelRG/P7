@@ -9,5 +9,6 @@ const fileStorageEngine = multer.diskStorage({
     cb(null, Date.now() + "." + file.originalname);
   },
 });
+const multerMiddleware = multer({ storage: fileStorageEngine }).single("file");
 
-module.exports = multer({ storage: fileStorageEngine }).single("image");
+export default multerMiddleware;

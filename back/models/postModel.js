@@ -33,22 +33,6 @@ const Post = sequelize.define("Post", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  like: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-  },
-  dislike: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-  },
-  userLiked: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
-    defaultValue: [],
-  },
-  userDisliked: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
-    defaultValue: [],
-  },
 });
 
 export default Post;

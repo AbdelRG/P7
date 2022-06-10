@@ -10,4 +10,12 @@ const getUser = async (req, res) => {
   res.status(200).json({ user: user });
 };
 
-export default getUser;
+const getUserById = async (req, res) => {
+  const user = await UserModel.findOne({
+    where: { id: req.body.userId },
+    attributes: { exclude: ["password"] },
+  });
+  res.status(200).json({ user: user });
+};
+
+export { getUser, getUserById };
