@@ -11,7 +11,11 @@ import { setPost, getAllPost } from "./controllers/postController.js";
 import multerMiddleware from "./middleware/multerMiddleware.js";
 import cors from "cors";
 import authenticateToken from "./middleware/authMiddleware.js";
-import { getUser, getUserById } from "./controllers/userController.js";
+import {
+  getUser,
+  getUserById,
+  updateUser,
+} from "./controllers/userController.js";
 
 const app = express();
 app.use("/images", express.static(path.join("./images")));
@@ -29,6 +33,7 @@ app.use("/getUser", authenticateToken, getUser);
 app.use("/setPost", authenticateToken, multerMiddleware, setPost);
 app.use("/getAllPost", authenticateToken, getAllPost);
 app.use("/getUserById", authenticateToken, getUserById);
+app.use("/updateUser", authenticateToken, multerMiddleware, updateUser);
 //app.use("/api", sauceRoutes);
 
 //server

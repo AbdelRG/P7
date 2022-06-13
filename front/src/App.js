@@ -3,8 +3,8 @@ import Home from "./pages/Home";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Post from "./components/Post";
 import PostsPage from "./pages/PostsPage";
+import ProfilPage from "./pages/ProfilPage";
 const App = () => {
   return (
     <BrowserRouter>
@@ -12,6 +12,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
 
         <Route path="/postsPage" element={<PostsPage />} />
+        <Route path="/profilPage" element={<ProfilPage />} />
       </Routes>
     </BrowserRouter>
   );

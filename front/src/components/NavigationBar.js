@@ -20,6 +20,14 @@ const NavigationBar = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
+  const profil = (e) => {
+    e.preventDefault();
+    navigate("/profilPage");
+  };
+  const accueil = (e) => {
+    e.preventDefault();
+    navigate("/postsPage");
+  };
 
   return (
     <>
@@ -27,7 +35,9 @@ const NavigationBar = () => {
         <Container>
           <Navbar.Brand href="#home">Groupomania</Navbar.Brand>
           <Nav className="me-auto navBar">
-            <Nav.Link href="#home">Accueil</Nav.Link>
+            <Nav.Link href="#home" onClick={accueil}>
+              Accueil
+            </Nav.Link>
 
             <Container className="navBarDropdown">
               <NavDropdown
@@ -35,7 +45,7 @@ const NavigationBar = () => {
                 title={pseudo}
                 menuVariant="dark"
               >
-                <NavDropdown.Item href="#action/3.2">
+                <NavDropdown.Item href="#action/3.2" onClick={profil}>
                   Voir Profil
                 </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">

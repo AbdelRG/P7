@@ -4,7 +4,6 @@ const setPost = async (req, res) => {
   const title = req.body.title;
   const text = req.body.text;
   const userId = req.user.id;
-  console.log(req.file);
 
   let imageUrl = "";
   if (req.file !== undefined) {

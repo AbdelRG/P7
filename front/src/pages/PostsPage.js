@@ -27,7 +27,7 @@ const PostsPage = () => {
   }, []);
 
   const posts = postArray.map((element) => {
-    return <Post post={element} />;
+    return <Post key={element.id} post={element} />;
   });
   if (!log) {
     useEffect(() => {

@@ -1,6 +1,6 @@
 import React from "react";
 import ProfilePic from "../../public/assets/images/icon-left-font-monochrome-black.png";
-import PostPic from "../../public/assets/images/icon-left-font-monochrome-black.png";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsDown } from "@fortawesome/free-solid-svg-icons";
@@ -22,18 +22,26 @@ const Post = (props) => {
       <div className="postContainer">
         <div className="postUserInfo">
           <div className="profilePicContainer">
-            <img
-              className="profilePic"
-              src={ProfilePic}
-              alt="image de profil"
-            />
+            {user.imageUrl && (
+              <img
+                className="profilePic"
+                src={user.imageUrl}
+                alt="image de profil"
+              />
+            )}
           </div>
           <p className="userPseudo">{user.pseudo}</p>
         </div>
         <div className="postContent">
           <h4 className="postTitle">{props.post.title}</h4>
           <p className="postText">{props.post.text}</p>
-          <img className="postPic" src={PostPic} alt="image du post" />
+          {props.post.imageUrl && (
+            <img
+              className="postPic"
+              src={props.post.imageUrl}
+              alt="image du post"
+            />
+          )}
         </div>
         <div className="postInfo">
           <FontAwesomeIcon className="postIcon" icon={faThumbsUp} />
