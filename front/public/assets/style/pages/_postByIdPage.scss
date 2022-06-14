@@ -1,0 +1,12 @@
+.postByIdContainer{
+    display: flex;
+    justify-content: space-around;
+    background-color: #eaeaea;
+    align-items: flex-start;
+}
+.commentPostContainer{
+    display: flex;
+    flex-direction: column;
+   
+    background-color: #eaeaea;
+}

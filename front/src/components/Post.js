@@ -1,5 +1,4 @@
 import React from "react";
-import ProfilePic from "../../public/assets/images/icon-left-font-monochrome-black.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";

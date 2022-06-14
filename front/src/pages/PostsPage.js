@@ -18,7 +18,9 @@ const useAuth = () => {
 const PostsPage = () => {
   const navigate = useNavigate();
   const log = useAuth();
-
+  const postNavigate = (id) => {
+    navigate("/postByid/" + id);
+  };
   const [postArray, setPostArray] = useState([]);
   useEffect(() => {
     getAllPost().then((res) => {
@@ -27,7 +29,13 @@ const PostsPage = () => {
   }, []);
 
   const posts = postArray.map((element) => {
-    return <Post key={element.id} post={element} />;
+    return (
+      <Post
+        //onClick={postNavigate(element.id)}
+        key={element.id}
+        post={element}
+      />
+    );
   });
   if (!log) {
     useEffect(() => {
