@@ -5,15 +5,21 @@ import React, { useState } from "react";
 
 import profilPic from "../../public/assets/images/icon-left-font-monochrome-black.png";
 
-const PostById = () => {
+const PostById = (props) => {
   return (
     <>
       <div className="postContainer">
         <div className="postContent">
-          <h4 className="postTitle">Title</h4>
-          <p className="postText">Text</p>
+          <h4 className="postTitle">{props.post.title}</h4>
+          <p className="postText">{props.post.text}</p>
 
-          <img className="postPic" src={profilPic} alt="image du post" />
+          {props.post.imageUrl && (
+            <img
+              className="postPic"
+              src={props.post.imageUrl}
+              alt="image du post"
+            />
+          )}
         </div>
       </div>
     </>

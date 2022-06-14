@@ -7,7 +7,11 @@ dotenv.config({ path: "./config/.env" });
 import postRoutes from "./routes/postRoutes.js";
 import db from "./config/db.js";
 import { login } from "./controllers/authController.js";
-import { setPost, getAllPost } from "./controllers/postController.js";
+import {
+  setPost,
+  getAllPost,
+  getPostById,
+} from "./controllers/postController.js";
 import multerMiddleware from "./middleware/multerMiddleware.js";
 import cors from "cors";
 import authenticateToken from "./middleware/authMiddleware.js";
@@ -34,6 +38,7 @@ app.use("/setPost", authenticateToken, multerMiddleware, setPost);
 app.use("/getAllPost", authenticateToken, getAllPost);
 app.use("/getUserById", authenticateToken, getUserById);
 app.use("/updateUser", authenticateToken, multerMiddleware, updateUser);
+app.use("/getPostById", authenticateToken, getPostById);
 //app.use("/api", sauceRoutes);
 
 //server

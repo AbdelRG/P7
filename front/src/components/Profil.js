@@ -1,22 +1,23 @@
 import React from "react";
-import profilPic from "../../public/assets/images/icon-left-font-monochrome-black.png";
 
-const Profil = () => {
+const Profil = (props) => {
   return (
     <>
       <div className="profilContainer">
         <div className="profilCardInfo">
-          <img
-            className="profilCardPic"
-            src={profilPic}
-            alt="image de profil"
-          />
+          {props.user.imageUrl && (
+            <img
+              className="profilCardPic"
+              src={props.user.imageUrl}
+              alt="image de profil"
+            />
+          )}
 
-          <p className="profilCardPseudo">Pseudo</p>
+          <p className="profilCardPseudo">{props.user.pseudo}</p>
         </div>
         <div className="bioInfo">
           <h5 className="bioTitle">Bio</h5>
-          <p className="bio">Bio</p>
+          <p className="bio">{props.user.bio}</p>
         </div>
       </div>
     </>

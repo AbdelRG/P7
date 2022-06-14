@@ -30,11 +30,9 @@ const PostsPage = () => {
 
   const posts = postArray.map((element) => {
     return (
-      <Post
-        //onClick={postNavigate(element.id)}
-        key={element.id}
-        post={element}
-      />
+      <div key={element.id} onClick={() => postNavigate(element.id)}>
+        <Post post={element} />
+      </div>
     );
   });
   if (!log) {
