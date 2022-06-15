@@ -34,6 +34,7 @@ const getPostById = async (req, res) => {
   const post = await PostModel.findOne({
     where: { id: req.body.postId },
   });
+
   res.status(200).json({ post: post });
 };
 

@@ -1,5 +1,5 @@
-const getPostById = async (postId) => {
-  const response = await fetch(`http://localhost:3000/getPostById`, {
+const getComentsByPostId = async (postId) => {
+  const response = await fetch(`http://localhost:3000/getComentsByPostId`, {
     method: "POST",
     headers: {
       authorization: localStorage.getItem("token"),
@@ -19,7 +19,5 @@ const getPostById = async (postId) => {
     );
     throw new Error(`Got status ${response.status}`);
   }
-  return response;
 };
-
-export default getPostById;
+export default getComentsByPostId;

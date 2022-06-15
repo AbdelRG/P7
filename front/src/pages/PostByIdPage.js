@@ -8,6 +8,8 @@ import Profil from "../components/Profil";
 import Coment from "../components/Coment";
 import getPostById from "../apiCall/getPostById";
 import getUserById from "../apiCall/getUserById";
+import getComentsByPostId from "../apiCall/getComentsByPostId";
+import ComentForm from "../components/ComentForm";
 
 const PostByIdPage = () => {
   const paramsId = useParams();
@@ -20,20 +22,36 @@ const PostByIdPage = () => {
 
   const [user, setUser] = useState({});
   useEffect(() => {
-    getUserById(post.userId).then((res) => {
-      setUser(res.user);
-    });
+    if (post && post.userId) {
+      getUserById(post.userId).then((res) => {
+        setUser(res.user);
+      });
+    }
   }, [post]);
+  const [comentArray, setComentArray] = useState([]);
+  useEffect(() => {
+    getComentsByPostId(paramsId.id).then((res) => {
+      console.log(res);
+      setComentArray(res);
+    });
+  }, []);
+
+  const coments = comentArray.map((element) => {
+    return <Coment coment={element} key={element.id} post={post} />;
+  });
 
   return (
     <>
       <NavigationBar />
+
       <div className="postByIdContainer">
         <PostById key={post.id} post={post} />
         <Profil key={user.id} user={user} />
       </div>
+
       <div className="commentPostContainer">
-        <Coment />
+        <ComentForm key={post.id} post={post} />
+        {coments}
       </div>
       <Footer />
     </>

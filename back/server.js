@@ -1,10 +1,10 @@
 import express from "express";
 import userRoutes from "./routes/userRoutes.js";
-//const sauceRoutes = require("./routes/sauceRoutes.js");
+
 import path from "path";
 import dotenv from "dotenv";
 dotenv.config({ path: "./config/.env" });
-import postRoutes from "./routes/postRoutes.js";
+
 import db from "./config/db.js";
 import { login } from "./controllers/authController.js";
 import {
@@ -20,6 +20,10 @@ import {
   getUserById,
   updateUser,
 } from "./controllers/userController.js";
+import {
+  setComent,
+  getComentsByPostId,
+} from "./controllers/comentController.js";
 
 const app = express();
 app.use("/images", express.static(path.join("./images")));
@@ -39,7 +43,8 @@ app.use("/getAllPost", authenticateToken, getAllPost);
 app.use("/getUserById", authenticateToken, getUserById);
 app.use("/updateUser", authenticateToken, multerMiddleware, updateUser);
 app.use("/getPostById", authenticateToken, getPostById);
-//app.use("/api", sauceRoutes);
+app.use("/setComent", authenticateToken, setComent);
+app.use("/getComentsByPostId", authenticateToken, getComentsByPostId);
 
 //server
 db.sync({ force: false, alter: false })

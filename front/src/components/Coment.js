@@ -1,35 +1,44 @@
 import React from "react";
-import profilPic from "../../public/assets/images/icon-left-font-monochrome-black.png";
-import { Form, Button, Modal, FloatingLabel } from "react-bootstrap";
 
-const Coment = () => {
+import { Form, Button, FloatingLabel } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import setComent from "../apiCall/setComent";
+import getUserById from "../apiCall/getUserById";
+
+const Coment = (props) => {
+  const [text, setText] = useState("");
+  const [postId, setPostId] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setPostId(props.post.id);
+
+    const response = await setComent(text, postId);
+    console.log(response);
+  };
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    if (props && props.coment.userId) {
+      getUserById(props.coment.userId).then((res) => {
+        setUser(res.user);
+      });
+    }
+  }, [props]);
+
   return (
     <>
       <div className="comentCardContainer">
-        <div className="comentFormContainer">
-          <h5 className="comentTitle">Commentaire</h5>
-          <FloatingLabel controlId="floatingTextarea2">
-            <Form.Group className="position-relative mb-3">
-              <Form.Control
-                as="textarea"
-                style={{ height: "100px", width: "300px" }}
-              />
-            </Form.Group>
-          </FloatingLabel>
-          <Button variant="dark" className="comentButton">
-            commenter
-          </Button>
-        </div>
         <div className="comentContainer">
           <div className="userComentInfo">
             <img
               className="ComentprofilPic"
-              src={profilPic}
+              src={user.imageUrl}
               alt="image de profil"
             />
-            <p className="userComentPseudo">Pseudo</p>
+            <p className="userComentPseudo">{user.pseudo}</p>
           </div>
-          <p className="coment">comment</p>
+          <p className="coment">{props.coment.text}</p>
         </div>
       </div>
     </>
