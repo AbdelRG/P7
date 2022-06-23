@@ -27,4 +27,14 @@ const getComentsByPostId = async (req, res) => {
   res.status(200).send(coments);
 };
 
-export { setComent, getComentsByPostId };
+const deleteComent = async (req, res) => {
+  const coment = await ComentModel.findOne({
+    where: { id: req.body.comentId },
+  });
+
+  await coment.destroy();
+
+  res.status(200).json({ message: "commentaire supprimer" });
+};
+
+export { setComent, getComentsByPostId, deleteComent };

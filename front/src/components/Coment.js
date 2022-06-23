@@ -2,22 +2,13 @@ import React from "react";
 
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import setComent from "../apiCall/setComent";
+import getUser from "../apiCall/getUser";
 import getUserById from "../apiCall/getUserById";
+import deleteComent from "../apiCall/deleteComent";
 
 const Coment = (props) => {
-  const [text, setText] = useState("");
-  const [postId, setPostId] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    setPostId(props.post.id);
-
-    const response = await setComent(text, postId);
-    console.log(response);
-  };
   const [user, setUser] = useState({});
+  const [userId, setUserId] = useState("");
   useEffect(() => {
     if (props && props.coment.userId) {
       getUserById(props.coment.userId).then((res) => {
@@ -25,6 +16,24 @@ const Coment = (props) => {
       });
     }
   }, [props]);
+
+  const isUser = () => {
+    getUser().then((res) => {
+      setUserId(res.user.id);
+    });
+
+    if (userId == user.id) {
+      return true;
+    } else return false;
+  };
+  isUser();
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    const response = await deleteComent(props.coment.id);
+    console.log(response);
+  };
 
   return (
     <>
@@ -39,6 +48,12 @@ const Coment = (props) => {
             <p className="userComentPseudo">{user.pseudo}</p>
           </div>
           <p className="coment">{props.coment.text}</p>
+
+          {isUser() && (
+            <Button variant="danger" onClick={handleDelete}>
+              Supprimer
+            </Button>
+          )}
         </div>
       </div>
     </>

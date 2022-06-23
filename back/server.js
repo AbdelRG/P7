@@ -26,6 +26,7 @@ import {
 import {
   setComent,
   getComentsByPostId,
+  deleteComent,
 } from "./controllers/comentController.js";
 
 const app = express();
@@ -52,6 +53,8 @@ app.use("/getComentsByPostId", authenticateToken, getComentsByPostId);
 app.use("/getPostByUserId", authenticateToken, getPostByUserId);
 app.use("/deletePost", authenticateToken, deletePost);
 app.use("", sseRoutes);
+app.use("/deleteComent", authenticateToken, deleteComent);
+
 //server
 db.sync({ force: false, alter: false })
   .then(console.log("connexion  à la base de donnée reussi"))

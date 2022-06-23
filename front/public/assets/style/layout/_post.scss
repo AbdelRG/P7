@@ -13,6 +13,7 @@
     
     &:hover{
         box-shadow: 1px 1px 8px 1px silver;
+        cursor: pointer;
     }
                  
     padding: 20px;
@@ -48,11 +49,18 @@
         .postText{
             font-weight: bold ;
         }
+        
     }
 
     .postInfo{
         display: flex;
         justify-content: space-evenly;
+        svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+            overflow: visible;
+            box-sizing: content-box;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
     }
     .postCommentForm{
         display: flex;
@@ -75,6 +83,7 @@
        min-width: 270px;
       padding: auto;
       margin: 0px;
+      height: 400px;
       
        
        .postUserInfo .profilePicContainer .profilePic {
@@ -89,6 +98,8 @@
         max-height: 175px;
         width: 225px;
     }
+
+    
 } 
  }
 }
