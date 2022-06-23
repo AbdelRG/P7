@@ -31,7 +31,6 @@ const PostByIdPage = () => {
   const [comentArray, setComentArray] = useState([]);
   useEffect(() => {
     getComentsByPostId(paramsId.id).then((res) => {
-      console.log(res);
       setComentArray(res);
     });
   }, []);

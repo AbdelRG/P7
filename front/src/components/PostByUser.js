@@ -1,13 +1,13 @@
 import React from "react";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { faComments } from "@fortawesome/free-solid-svg-icons";
+import { Form, Button, FloatingLabel } from "react-bootstrap";
 import getUserById from "../apiCall/getUserById";
 import React, { useEffect } from "react";
 import React, { useState } from "react";
+import deletePost from "../apiCall/deletePost";
 
-const Post = (props) => {
+import React from "react";
+
+const PostByUser = (props) => {
   const [user, setUser] = useState({});
   useEffect(() => {
     getUserById(props.post.userId).then((res) => {
@@ -15,6 +15,12 @@ const Post = (props) => {
     });
   }, []);
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    const response = await deletePost(props.post.id);
+    console.log(response);
+  };
   return (
     <>
       <div className="postContainer">
@@ -41,12 +47,13 @@ const Post = (props) => {
             />
           )}
         </div>
-        <div className="postInfo">
-          <FontAwesomeIcon className="postIcon" icon={faComments} />
-        </div>
+        <div className="postInfo"></div>
+        <Button variant="danger" onClick={handleDelete}>
+          Supprimer
+        </Button>
       </div>
     </>
   );
 };
 
-export default Post;
+export default PostByUser;

@@ -10,3 +10,40 @@
    
     background-color: #eaeaea;
 }
+
+
+
+
+
+@media screen and (min-width:0px) and  (max-width: 425px) {
+    .postByIdContainer {
+        background-color: #eaeaea;
+        justify-content: space-around;
+        align-items: center;
+        display: flex;
+        flex-direction: column-reverse;
+        .postContainer{
+            min-width: 270px;
+           padding: auto;
+           margin-top: 30px;
+           height: 350px;
+           justify-content: space-around;
+
+           
+            
+            .postUserInfo .profilePicContainer .profilePic {
+             object-fit: cover;
+             max-height: 50px;
+             max-width: 75px;
+             border: 0.5px solid;
+             border-radius: 50%;
+         }
+         .postContent .postPic {
+             object-fit: cover;
+             max-height: 175px;
+             width: 225px;
+         }
+     } 
+    }
+   
+}

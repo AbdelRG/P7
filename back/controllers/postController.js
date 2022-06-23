@@ -1,5 +1,6 @@
 import PostModel from "../models/postModel.js";
-
+import ComentModel from "../models/comentModel.js";
+import sse from "../config/sse.js";
 const setPost = async (req, res) => {
   const title = req.body.title;
   const text = req.body.text;
@@ -15,10 +16,12 @@ const setPost = async (req, res) => {
     userId: userId,
     imageUrl: imageUrl,
   });
+
   try {
     await post.save();
+    sse.send(post, "post");
 
-    res.status(201).json({ message: "post upload" });
+    res.status(201).send(post);
   } catch (err) {
     console.log(err);
     res.status(500).send("INTERNAL SERVER ERROR");
@@ -38,4 +41,26 @@ const getPostById = async (req, res) => {
   res.status(200).json({ post: post });
 };
 
-export { setPost, getAllPost, getPostById };
+const getPostByUserId = async (req, res) => {
+  const userId = req.user.id;
+  const post = await PostModel.findAll({
+    where: { userId: userId },
+  });
+  res.status(200).send(post);
+};
+
+const deletePost = async (req, res) => {
+  const post = await PostModel.findOne({
+    where: { id: req.body.postId },
+  });
+
+  const comments = await ComentModel.destroy({
+    where: { postId: req.body.postId },
+  });
+
+  await post.destroy();
+
+  res.status(200).json({ message: "post supprimé" });
+};
+
+export { setPost, getAllPost, getPostById, getPostByUserId, deletePost };

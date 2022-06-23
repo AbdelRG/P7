@@ -28,6 +28,10 @@ const NavigationBar = () => {
     e.preventDefault();
     navigate("/postsPage");
   };
+  const postPage = (e) => {
+    e.preventDefault();
+    navigate("/postByUserPage");
+  };
 
   return (
     <>
@@ -48,7 +52,7 @@ const NavigationBar = () => {
                 <NavDropdown.Item href="#action/3.2" onClick={profil}>
                   Voir Profil
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
+                <NavDropdown.Item href="#action/3.3" onClick={postPage}>
                   Voir Post
                 </NavDropdown.Item>
                 <NavDropdown.Divider />

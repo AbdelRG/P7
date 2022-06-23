@@ -37,3 +37,30 @@
         
     }
 }
+
+
+
+
+@media screen and (min-width:0px) and  (max-width: 425px) {
+   .home{max-height: 825px;
+    background-color: #eaeaea;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    .logo{
+        margin-left: 75px;
+        width: 150px;
+        padding-bottom: 0px;
+    }
+    .signupForm-container{
+        margin-bottom: 50px;
+         .signupForm {
+        width: 200px;
+        height: 25%;
+        padding-left: 30px;
+    }
+   }
+}
+}

@@ -1,13 +1,16 @@
 .postContainer{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     min-width: 400px;
+    max-width: 600px;
     height: 500px;
     background-color: white;
     
     margin-bottom: 50px;
     margin-top: 50px;
     border-radius: 2px 2px 2px 2px;
+    
     &:hover{
         box-shadow: 1px 1px 8px 1px silver;
     }
@@ -54,4 +57,38 @@
     .postCommentForm{
         display: flex;
     }
+}
+
+
+@media screen and (min-width:0px) and  (max-width: 425px) {
+   
+     .containerPost{
+        max-width: 275px;
+      margin-bottom: 30px;
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+
+    .postContainer{
+       min-width: 270px;
+      padding: auto;
+      margin: 0px;
+      
+       
+       .postUserInfo .profilePicContainer .profilePic {
+        object-fit: cover;
+        max-height: 50px;
+        max-width: 75px;
+        border: 0.5px solid;
+        border-radius: 50%;
+    }
+    .postContent .postPic {
+        object-fit: cover;
+        max-height: 175px;
+        width: 225px;
+    }
+} 
+ }
 }

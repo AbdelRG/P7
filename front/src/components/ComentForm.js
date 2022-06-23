@@ -25,7 +25,7 @@ const ComentForm = (props) => {
             <Form.Control
               as="textarea"
               maxLength={"280"}
-              style={{ height: "100px", width: "300px" }}
+              style={{ height: "100px" }}
               value={text}
               onChange={(e) => setText(e.target.value)}
             />

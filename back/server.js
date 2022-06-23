@@ -1,5 +1,6 @@
 import express from "express";
 import userRoutes from "./routes/userRoutes.js";
+import sseRoutes from "./routes/sseRoutes.js";
 
 import path from "path";
 import dotenv from "dotenv";
@@ -11,6 +12,8 @@ import {
   setPost,
   getAllPost,
   getPostById,
+  getPostByUserId,
+  deletePost,
 } from "./controllers/postController.js";
 import multerMiddleware from "./middleware/multerMiddleware.js";
 import cors from "cors";
@@ -32,6 +35,7 @@ app.use(
   cors({
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
+    withCredentials: true,
   })
 );
 //routes
@@ -45,7 +49,9 @@ app.use("/updateUser", authenticateToken, multerMiddleware, updateUser);
 app.use("/getPostById", authenticateToken, getPostById);
 app.use("/setComent", authenticateToken, setComent);
 app.use("/getComentsByPostId", authenticateToken, getComentsByPostId);
-
+app.use("/getPostByUserId", authenticateToken, getPostByUserId);
+app.use("/deletePost", authenticateToken, deletePost);
+app.use("", sseRoutes);
 //server
 db.sync({ force: false, alter: false })
   .then(console.log("connexion  à la base de donnée reussi"))

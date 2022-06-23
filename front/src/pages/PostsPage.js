@@ -6,6 +6,8 @@ import React, { useEffect } from "react";
 import Post from "../components/Post";
 import PostForm from "../components/PostForm";
 import getAllPost from "../apiCall/getAllPost";
+import evtSource from "../apiCall/ssEvent";
+
 const useAuth = () => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -26,11 +28,25 @@ const PostsPage = () => {
     getAllPost().then((res) => {
       setPostArray(res);
     });
+    evtSource.addEventListener("post", async (e) => {
+      const newData = e.data;
+      console.log(postArray);
+      await postArray.push(newData);
+      //console.log(newArray);
+      setPostArray(postArray);
+    });
   }, []);
+  evtSource.onerror = async function () {
+    evtSource.close();
+  };
 
   const posts = postArray.map((element) => {
     return (
-      <div key={element.id} onClick={() => postNavigate(element.id)}>
+      <div
+        className="containerPost"
+        key={element.id}
+        onClick={() => postNavigate(element.id)}
+      >
         <Post post={element} />
       </div>
     );
@@ -43,8 +59,8 @@ const PostsPage = () => {
     return (
       <>
         <NavigationBar />
-        <div className="login">
-          <PostForm />
+        <div className="postPageContainer">
+          <PostForm setArray={setPostArray} />
           {posts}
         </div>
         <Footer />

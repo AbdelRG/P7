@@ -52,8 +52,37 @@ border: solid black 1px;
     .form-floating{
         margin-top: 15px;
         margin-left: 30px;
+        width: 300px;
     }
     .comentButton{
         margin-left: 30px;
     }
+}
+
+@media screen and (min-width:0px) and  (max-width: 425px) {
+    .comentFormContainer {
+        background-color: #fff;
+        border: 1px solid #000;
+        border-radius: 2px;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-bottom: 30px;
+        margin-left: 50px;
+        margin-right: 50px;
+        display: flex;
+        flex-direction: column;
+        .form-floating {
+            margin-top: 15px;
+           margin-left: 0px;
+            width: 200px;
+        }
+        .comentTitle {
+            margin-left: 10px;
+        }
+        .comentButton {
+            margin-left: 10px;
+            margin-bottom: 15px;
+        }
+    }
+   
 }

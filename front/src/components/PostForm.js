@@ -1,7 +1,8 @@
 import { Form, Button, Modal, FloatingLabel } from "react-bootstrap";
 import React from "react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import setPost from "../apiCall/setPost";
+import getAllPost from "../apiCall/getAllPost";
 
 const PostForm = () => {
   const [show, setShow] = useState(false);
@@ -11,6 +12,7 @@ const PostForm = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -19,6 +21,8 @@ const PostForm = () => {
     formData.append("file", file);
     const response = await setPost(formData);
     console.log(response);
+
+    setShow(false);
   };
   return (
     <>

@@ -11,3 +11,23 @@
  
  }
  }
+
+ @media screen and (min-width:0px) and  (max-width: 425px) {
+   
+  .navbar-nav {
+    flex-direction: column;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-around;
+}
+ 
+  .container .navBarDropdown {
+    justify-content: space-around;
+    display: flex;
+    align-items: center;
+}
+}
