@@ -19,7 +19,6 @@ const deletePost = async (postId) => {
     );
     throw new Error(`Got status ${response.status}`);
   }
-  return response;
 };
 
 export default deletePost;

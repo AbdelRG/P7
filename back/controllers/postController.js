@@ -29,7 +29,9 @@ const setPost = async (req, res) => {
 };
 
 const getAllPost = async (req, res) => {
-  const post = await PostModel.findAll();
+  const post = await PostModel.findAll({
+    order: [["id", "DESC"]],
+  });
   res.status(200).send(post);
 };
 
@@ -45,6 +47,7 @@ const getPostByUserId = async (req, res) => {
   const userId = req.user.id;
   const post = await PostModel.findAll({
     where: { userId: userId },
+    order: [["id", "DESC"]],
   });
   res.status(200).send(post);
 };
@@ -59,6 +62,7 @@ const deletePost = async (req, res) => {
   });
 
   await post.destroy();
+  sse.send(post, "deletePost");
 
   res.status(200).json({ message: "post supprimé" });
 };

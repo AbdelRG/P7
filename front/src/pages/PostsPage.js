@@ -28,44 +28,38 @@ const PostsPage = () => {
     getAllPost().then((res) => {
       setPostArray(res);
     });
-    evtSource.addEventListener("post", async (e) => {
-      const newData = e.data;
-      console.log(postArray);
-      await postArray.push(newData);
-      //console.log(newArray);
-      setPostArray(postArray);
-    });
   }, []);
-  evtSource.onerror = async function () {
-    evtSource.close();
-  };
-
-  const posts = postArray.map((element) => {
-    return (
-      <div
-        className="containerPost"
-        key={element.id}
-        onClick={() => postNavigate(element.id)}
-      >
-        <Post post={element} />
-      </div>
-    );
-  });
-  if (!log) {
-    useEffect(() => {
-      navigate("/");
+  evtSource.addEventListener("post", async (e) => {
+    await getAllPost().then((res) => {
+      setPostArray(res);
     });
-  } else {
-    return (
-      <>
-        <NavigationBar />
-        <div className="postPageContainer">
-          <PostForm setArray={setPostArray} />
-          {posts}
-        </div>
-        <Footer />
-      </>
-    );
-  }
+
+    const newData = JSON.parse(e.data);
+
+    const newArray = [newData, ...postArray];
+
+    setPostArray(newArray);
+  });
+
+  if (!log) return <Navigate to="/" />;
+
+  return (
+    <>
+      <NavigationBar />
+      <div className="postPageContainer">
+        <PostForm />
+        {postArray.map((element, i) => (
+          <div
+            className="containerPost"
+            key={i}
+            onClick={() => postNavigate(element.id)}
+          >
+            <Post post={element} />
+          </div>
+        ))}
+      </div>
+      <Footer />
+    </>
+  );
 };
 export default PostsPage;

@@ -1,9 +1,7 @@
 import React from "react";
-import getUserById from "../apiCall/getUserById";
+
 import React, { useEffect } from "react";
 import React, { useState } from "react";
-
-import profilPic from "../../public/assets/images/icon-left-font-monochrome-black.png";
 
 const PostById = (props) => {
   return (

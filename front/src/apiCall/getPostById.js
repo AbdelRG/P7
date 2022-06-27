@@ -19,7 +19,6 @@ const getPostById = async (postId) => {
     );
     throw new Error(`Got status ${response.status}`);
   }
-  return response;
 };
 
 export default getPostById;

@@ -19,7 +19,6 @@ const deleteComent = async (comentId) => {
     );
     throw new Error(`Got status ${response.status}`);
   }
-  return response;
 };
 
 export default deleteComent;

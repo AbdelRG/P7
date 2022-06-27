@@ -1,7 +1,7 @@
 .postByUserPageContainer{
     display: flex;
     justify-content: center;
-    min-height: 500px ;
+    min-height: 1000px ;
     padding-top: 50px;
     background-color: #eaeaea;
     
@@ -11,6 +11,9 @@
 
 @media screen and (min-width:0px) and  (max-width: 425px) {
     .postByUserPageContainer {
+        min-width: 280px;
+        margin : 0px;
+        min-height: 800px ;
     .postContainer {
         min-width: 275px;
         
@@ -23,6 +26,12 @@
         margin-bottom: 50px;
         padding: 20px;
         display: flex;
+
+        .postContent .postPic {
+            object-fit: cover;
+            max-height: 175px;
+            width: 225px;
+        }
     }
 }
 }

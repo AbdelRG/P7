@@ -1,4 +1,5 @@
 import ComentModel from "../models/comentModel.js";
+import sse from "../config/sse.js";
 
 const setComent = async (req, res) => {
   const text = req.body.text;
@@ -12,7 +13,7 @@ const setComent = async (req, res) => {
   });
   try {
     await coment.save();
-
+    sse.send(coment, "coment");
     res.status(201).json({ message: "coment upload" });
   } catch (err) {
     console.log(err);
@@ -23,6 +24,7 @@ const setComent = async (req, res) => {
 const getComentsByPostId = async (req, res) => {
   const coments = await ComentModel.findAll({
     where: { postId: req.body.postId },
+    order: [["id", "DESC"]],
   });
   res.status(200).send(coments);
 };
@@ -33,6 +35,7 @@ const deleteComent = async (req, res) => {
   });
 
   await coment.destroy();
+  sse.send(coment, "deleteComent");
 
   res.status(200).json({ message: "commentaire supprimer" });
 };

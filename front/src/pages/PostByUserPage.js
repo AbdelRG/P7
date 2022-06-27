@@ -4,6 +4,7 @@ import NavigationBar from "../components/NavigationBar";
 import React, { useState, useEffect } from "react";
 import getPostByUserId from "../apiCall/getPostByUserId";
 import PostByUser from "../components/PostByUser";
+import evtSource from "../apiCall/ssEvent";
 
 const PostByUserPage = () => {
   const [postArray, setPostArray] = useState([]);
@@ -12,6 +13,11 @@ const PostByUserPage = () => {
       setPostArray(res);
     });
   }, []);
+  evtSource.addEventListener("deletePost", async (e) => {
+    const newData = JSON.parse(e.data);
+
+    setPostArray(postArray.filter((post) => post.id !== newData.id));
+  });
 
   const posts = postArray.map((element) => {
     return (

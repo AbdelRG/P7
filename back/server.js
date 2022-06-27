@@ -29,6 +29,8 @@ import {
   deleteComent,
 } from "./controllers/comentController.js";
 
+import addFlush from "./middleware/addFlush.js";
+
 const app = express();
 app.use("/images", express.static(path.join("./images")));
 app.use(express.json());
@@ -52,7 +54,7 @@ app.use("/setComent", authenticateToken, setComent);
 app.use("/getComentsByPostId", authenticateToken, getComentsByPostId);
 app.use("/getPostByUserId", authenticateToken, getPostByUserId);
 app.use("/deletePost", authenticateToken, deletePost);
-app.use("", sseRoutes);
+app.use("", addFlush, sseRoutes);
 app.use("/deleteComent", authenticateToken, deleteComent);
 
 //server

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Form, Button, FloatingLabel } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import getUser from "../apiCall/getUser";
 import getUserById from "../apiCall/getUserById";

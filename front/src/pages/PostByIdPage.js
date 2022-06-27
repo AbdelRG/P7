@@ -10,6 +10,7 @@ import getPostById from "../apiCall/getPostById";
 import getUserById from "../apiCall/getUserById";
 import getComentsByPostId from "../apiCall/getComentsByPostId";
 import ComentForm from "../components/ComentForm";
+import evtSource from "../apiCall/ssEvent";
 
 const PostByIdPage = () => {
   const paramsId = useParams();
@@ -34,6 +35,24 @@ const PostByIdPage = () => {
       setComentArray(res);
     });
   }, []);
+
+  evtSource.addEventListener("coment", async (e) => {
+    await getComentsByPostId(paramsId.id).then((res) => {
+      setComentArray(res);
+    });
+
+    const newData = JSON.parse(e.data);
+
+    const newArray = [newData, ...comentArray];
+
+    setComentArray(newArray);
+  });
+
+  evtSource.addEventListener("deleteComent", async (e) => {
+    const newData = JSON.parse(e.data);
+
+    setComentArray(comentArray.filter((coment) => coment.id !== newData.id));
+  });
 
   const coments = comentArray.map((element) => {
     return <Coment coment={element} key={element.id} post={post} />;
