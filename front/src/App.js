@@ -7,6 +7,8 @@ import PostsPage from "./pages/PostsPage";
 import ProfilPage from "./pages/ProfilPage";
 import PostByIdPage from "./pages/PostByIdPage";
 import PostByUserPage from "./pages/PostByUserPage";
+import UsersPage from "./pages/UsersPage";
+import ModeratePostPage from "./pages/ModeratePostPage";
 const App = () => {
   return (
     <BrowserRouter>
@@ -17,6 +19,8 @@ const App = () => {
         <Route path="/profilPage" element={<ProfilPage />} />
         <Route path="/postById/:id" element={<PostByIdPage />} />
         <Route path="/postByUserPage" element={<PostByUserPage />} />
+        <Route path="/usersPage" element={<UsersPage />} />
+        <Route path="/moderatePostPage" element={<ModeratePostPage />} />
       </Routes>
     </BrowserRouter>
   );

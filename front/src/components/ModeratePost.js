@@ -1,24 +1,23 @@
 import React from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "react-bootstrap";
-import { faComments } from "@fortawesome/free-solid-svg-icons";
+
 import getUserById from "../apiCall/getUserById";
 import React, { useEffect } from "react";
 import React, { useState } from "react";
-import isAdmin from "../auth/isAdmin";
-import deletePost from "../apiCall/deletePost";
 import getUser from "../apiCall/getUser";
+import isAdmin from "../auth/isAdmin";
+import restorePost from "../apiCall/restorePost";
+import adminDeletePost from "../apiCall/adminDeletePost";
 
-const Post = (props) => {
+const ModeratePost = (props) => {
   const [user, setUser] = useState({});
+  const [role, setRole] = useState("");
   useEffect(() => {
     getUserById(props.post.userId).then((res) => {
       setUser(res.user);
     });
   }, []);
-
-  const [role, setRole] = useState("");
 
   const userRole = () => {
     getUser().then((res) => {
@@ -28,10 +27,17 @@ const Post = (props) => {
 
   userRole();
 
+  const handleRestore = async (e) => {
+    e.preventDefault();
+
+    const response = await restorePost(props.post.id);
+    console.log(response);
+  };
+
   const handleDelete = async (e) => {
     e.preventDefault();
 
-    const response = await deletePost(props.post.id);
+    const response = await adminDeletePost(props.post.id);
     console.log(response);
   };
 
@@ -62,20 +68,20 @@ const Post = (props) => {
           )}
         </div>
         <div className="postInfo">
-          <FontAwesomeIcon className="postIcon" icon={faComments} />
+          {isAdmin(role) && (
+            <Button variant="success" onClick={handleRestore}>
+              Restaurer
+            </Button>
+          )}
+          {isAdmin(role) && (
+            <Button variant="danger" onClick={handleDelete}>
+              Supprimer
+            </Button>
+          )}
         </div>
-        {isAdmin(role) && (
-          <Button
-            variant="danger"
-            className="deletePostButton"
-            onClick={handleDelete}
-          >
-            Supprimer
-          </Button>
-        )}
       </div>
     </>
   );
 };
 
-export default Post;
+export default ModeratePost;

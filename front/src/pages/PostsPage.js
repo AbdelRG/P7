@@ -41,6 +41,12 @@ const PostsPage = () => {
     setPostArray(newArray);
   });
 
+  evtSource.addEventListener("deletePost", async (e) => {
+    const newData = JSON.parse(e.data);
+
+    setPostArray(postArray.filter((post) => post.id !== newData.id));
+  });
+
   if (!log) return <Navigate to="/" />;
 
   return (

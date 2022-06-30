@@ -11,6 +11,9 @@
     margin-top: 50px;
     border-radius: 2px 2px 2px 2px;
     
+   
+       
+    
     &:hover{
         box-shadow: 1px 1px 8px 1px silver;
         cursor: pointer;
@@ -55,12 +58,16 @@
     .postInfo{
         display: flex;
         justify-content: space-evenly;
+       
+        
         svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
             overflow: visible;
             box-sizing: content-box;
             font-size: 20px;
             margin-bottom: 30px;
         }
+
+        
     }
     .postCommentForm{
         display: flex;
@@ -84,6 +91,17 @@
       padding: auto;
       margin: 0px;
       height: 400px;
+
+      .postInfo{
+        justify-content: flex-start;
+      }
+
+      .deletePostButton{
+        position: absolute;
+        z-index: 1;
+        margin-top: 325px;
+        margin-left: 135px;
+      }
       
        
        .postUserInfo .profilePicContainer .profilePic {

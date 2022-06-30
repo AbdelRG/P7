@@ -1,4 +1,5 @@
 import UserModel from "../models/userModel.js";
+import sse from "../config/sse.js";
 
 const getUser = async (req, res) => {
   const userId = req.user.id;
@@ -37,4 +38,22 @@ const updateUser = async (req, res) => {
   res.status(200).json({ message: "profil mis a jour" });
 };
 
-export { getUser, getUserById, updateUser };
+const getAllUsers = async (req, res) => {
+  const user = await UserModel.findAll({
+    attributes: { exclude: ["password"] },
+  });
+  res.status(200).send(user);
+};
+
+const deleteUser = async (req, res) => {
+  const user = await UserModel.findOne({
+    where: { id: req.body.userId },
+  });
+
+  await user.destroy({ force: true });
+  sse.send(user, "deleteUser");
+
+  res.status(200).json({ message: "utilisateur supprimer" });
+};
+
+export { getUser, getUserById, updateUser, getAllUsers, deleteUser };

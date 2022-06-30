@@ -7,4 +7,14 @@
     align-items: center;
     background-color: #eaeaea;
     padding-top: 20px;
+       z-index: 0;
+    .containerPost {
+        z-index: 0;
+         .deletePostButton {
+        z-index: 1;
+        margin-top: 400px;
+        margin-left: 250px;
+        position: absolute;
+    }
 }
+   }

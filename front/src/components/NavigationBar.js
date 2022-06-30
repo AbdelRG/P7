@@ -4,17 +4,21 @@ import React from "react";
 import React, { useState } from "react";
 import getUser from "../apiCall/getUser";
 import { useNavigate } from "react-router-dom";
+import isAdmin from "../auth/isAdmin";
 
 const NavigationBar = () => {
   const [pseudo, setPseudo] = useState("");
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
   const user = () => {
     getUser().then((res) => {
       setPseudo(res.user.pseudo);
+      setRole(res.user.role);
     });
   };
 
   user();
+
   const deconnexion = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
@@ -33,6 +37,16 @@ const NavigationBar = () => {
     navigate("/postByUserPage");
   };
 
+  const usersPage = (e) => {
+    e.preventDefault();
+    navigate("/usersPage");
+  };
+
+  const moderatePostPage = (e) => {
+    e.preventDefault();
+    navigate("/moderatePostPage");
+  };
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -42,7 +56,16 @@ const NavigationBar = () => {
             <Nav.Link href="#home" onClick={accueil}>
               Accueil
             </Nav.Link>
-
+            {isAdmin(role) && (
+              <Nav.Link href="#home" onClick={usersPage}>
+                Gerer les utilisateurs
+              </Nav.Link>
+            )}
+            {isAdmin(role) && (
+              <Nav.Link href="#home" onClick={moderatePostPage}>
+                Gerer les posts
+              </Nav.Link>
+            )}
             <Container className="navBarDropdown">
               <NavDropdown
                 id="nav-dropdown-dark-example"

@@ -55,11 +55,23 @@
         padding-bottom: 0px;
     }
     .signupForm-container{
-        margin-bottom: 50px;
+        margin-bottom: 30px;
+
+        .alert-success {
+            color: #0f5132;
+            background-color: #d1e7dd;
+            border-color: #badbcc;
+            width: 200px;
+        }
          .signupForm {
         width: 200px;
         height: 25%;
         padding-left: 30px;
+       
+    }
+    .pAccount{
+        margin-bottom: 15px;
+        width: 200px;
     }
    }
 }

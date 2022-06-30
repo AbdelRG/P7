@@ -2,53 +2,62 @@ import bcrypt from "bcrypt";
 import { Sequelize, DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-const User = sequelize.define("User", {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true,
-      isLowercase: true,
+const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+        isLowercase: true,
+      },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [6, 1024],
+      },
+    },
+    pseudo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isLowercase: true,
+        len: [3, 15],
+      },
+    },
+    bio: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [0, 1024],
+      },
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [0, 1024],
+      },
+    },
+    role: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
     },
   },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      len: [6, 1024],
-    },
-  },
-  pseudo: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      isLowercase: true,
-      len: [3, 15],
-    },
-  },
-  bio: {
-    type: DataTypes.STRING,
-    allowNull: true,
-    validate: {
-      len: [0, 1024],
-    },
-  },
-  imageUrl: {
-    type: DataTypes.STRING,
-    allowNull: true,
-    validate: {
-      len: [0, 1024],
-    },
-  },
-});
+  { paranoid: true }
+);
 
 //play function before save into DB
 

@@ -27,8 +27,9 @@ const LoginForm = () => {
 
   return (
     <>
+      <p className="pAccount"> Vous avez deja un compte ?</p>
       <Button variant="dark" className="buttonConnect" onClick={handleShow}>
-        Vous avez déja un compte ?
+        Connexion
       </Button>
 
       <Modal show={show} onHide={handleClose}>

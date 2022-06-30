@@ -14,6 +14,9 @@ import {
   getPostById,
   getPostByUserId,
   deletePost,
+  getDeletedPost,
+  restorePost,
+  adminDeletePost,
 } from "./controllers/postController.js";
 import multerMiddleware from "./middleware/multerMiddleware.js";
 import cors from "cors";
@@ -22,6 +25,8 @@ import {
   getUser,
   getUserById,
   updateUser,
+  getAllUsers,
+  deleteUser,
 } from "./controllers/userController.js";
 import {
   setComent,
@@ -56,6 +61,11 @@ app.use("/getPostByUserId", authenticateToken, getPostByUserId);
 app.use("/deletePost", authenticateToken, deletePost);
 app.use("", addFlush, sseRoutes);
 app.use("/deleteComent", authenticateToken, deleteComent);
+app.use("/getAllUsers", authenticateToken, getAllUsers);
+app.use("/deleteUser", authenticateToken, deleteUser);
+app.use("/getDeletedPost", authenticateToken, getDeletedPost);
+app.use("/restorePost", authenticateToken, restorePost);
+app.use("/adminDeletePost", authenticateToken, adminDeletePost);
 
 //server
 db.sync({ force: false, alter: false })

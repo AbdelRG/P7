@@ -5,10 +5,12 @@ import React, { useState, useEffect } from "react";
 import getUser from "../apiCall/getUser";
 import getUserById from "../apiCall/getUserById";
 import deleteComent from "../apiCall/deleteComent";
+import isAdmin from "../auth/isAdmin";
 
 const Coment = (props) => {
   const [user, setUser] = useState({});
   const [userId, setUserId] = useState("");
+  const [userRole, setUserRole] = useState("");
   useEffect(() => {
     if (props && props.coment.userId) {
       getUserById(props.coment.userId).then((res) => {
@@ -20,6 +22,7 @@ const Coment = (props) => {
   const isUser = () => {
     getUser().then((res) => {
       setUserId(res.user.id);
+      setUserRole(res.user.role);
     });
 
     if (userId == user.id) {
@@ -48,7 +51,6 @@ const Coment = (props) => {
             <p className="userComentPseudo">{user.pseudo}</p>
           </div>
           <p className="coment">{props.coment.text}</p>
-
           {isUser() && (
             <Button variant="danger" onClick={handleDelete}>
               Supprimer

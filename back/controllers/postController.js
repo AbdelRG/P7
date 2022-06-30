@@ -1,6 +1,7 @@
 import PostModel from "../models/postModel.js";
 import ComentModel from "../models/comentModel.js";
 import sse from "../config/sse.js";
+import Op from "sequelize";
 const setPost = async (req, res) => {
   const title = req.body.title;
   const text = req.body.text;
@@ -67,4 +68,51 @@ const deletePost = async (req, res) => {
   res.status(200).json({ message: "post supprimé" });
 };
 
-export { setPost, getAllPost, getPostById, getPostByUserId, deletePost };
+const getDeletedPost = async (req, res) => {
+  const post = await PostModel.findAll({
+    // where: {
+    //   deletedAt: {
+    //     [Op.ne]: null,
+    //   },
+    // },
+    paranoid: false,
+  });
+  const response = post.filter((post) => post.deletedAt !== null);
+  res.status(200).send(response);
+};
+
+const restorePost = async (req, res) => {
+  const post = await PostModel.findOne({
+    where: { id: req.body.postId },
+    paranoid: false,
+  });
+
+  await post.restore();
+  sse.send(post, "restorePost");
+  res.status(200).send(post);
+};
+
+const adminDeletePost = async (req, res) => {
+  const post = await PostModel.findOne({
+    where: { id: req.body.postId },
+    paranoid: false,
+  });
+  const comments = await ComentModel.destroy({
+    where: { postId: req.body.postId },
+    force: true,
+  });
+  await post.destroy({ force: true });
+  sse.send(post, "adminDeletePost");
+  res.status(200).send(post);
+};
+
+export {
+  setPost,
+  getAllPost,
+  getPostById,
+  getPostByUserId,
+  deletePost,
+  getDeletedPost,
+  restorePost,
+  adminDeletePost,
+};
