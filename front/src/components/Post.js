@@ -30,7 +30,7 @@ const Post = (props) => {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-
+    e.stopPropagation();
     const response = await deletePost(props.post.id);
     console.log(response);
   };

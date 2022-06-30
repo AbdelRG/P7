@@ -51,7 +51,7 @@ const Coment = (props) => {
             <p className="userComentPseudo">{user.pseudo}</p>
           </div>
           <p className="coment">{props.coment.text}</p>
-          {isUser() && (
+          {(isUser() || isAdmin(userRole)) && (
             <Button variant="danger" onClick={handleDelete}>
               Supprimer
             </Button>
