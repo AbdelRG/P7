@@ -7,6 +7,7 @@ import Post from "../components/Post";
 import PostForm from "../components/PostForm";
 import getAllPost from "../apiCall/getAllPost";
 import evtSource from "../apiCall/ssEvent";
+import { Navigate } from "react-router-dom";
 
 const useAuth = () => {
   const token = localStorage.getItem("token");

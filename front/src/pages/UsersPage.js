@@ -7,11 +7,26 @@ import React, { useEffect } from "react";
 import getAllUsers from "../apiCall/getAllUsers";
 import { InputGroup, Form } from "react-bootstrap";
 import evtSource from "../apiCall/ssEvent";
+import getUser from "../apiCall/getUser";
+import { useNavigate } from "react-router-dom";
 
 const UsersPage = () => {
   const [usersArray, setUsersArray] = useState([]);
   const [name, setName] = useState("");
   const [foundUsers, setFoundUsers] = useState(usersArray);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    user();
+  });
+
+  const user = async () => {
+    await getUser().then((res) => {
+      if (res.user.role == 0) {
+        navigate("/postsPage");
+      }
+    });
+  };
 
   useEffect(() => {
     getAllUsers().then((res) => {

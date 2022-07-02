@@ -14,7 +14,6 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route path="/postsPage" element={<PostsPage />} />
         <Route path="/profilPage" element={<ProfilPage />} />
         <Route path="/postById/:id" element={<PostByIdPage />} />

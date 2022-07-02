@@ -6,9 +6,24 @@ import React, { useEffect } from "react";
 import getDeletedPost from "../apiCall/getDeletedPost";
 import ModeratePost from "../components/ModeratePost";
 import evtSource from "../apiCall/ssEvent";
+import getUser from "../apiCall/getUser";
+import { useNavigate } from "react-router-dom";
 
 const ModeratePostPage = () => {
   const [postArray, setPostArray] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    user();
+  });
+
+  const user = async () => {
+    await getUser().then((res) => {
+      if (res.user.role == 0) {
+        navigate("/postsPage");
+      }
+    });
+  };
 
   useEffect(() => {
     getDeletedPost().then((res) => {
