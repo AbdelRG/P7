@@ -32,7 +32,8 @@
             padding-right:5px ;
             .profilePic{
                 object-fit: cover;
-                 max-height: 50px;
+                 height: 60px;
+                 width: 60px;
                  border-radius: 50%;
                  border: solid  0.5px;
                  
@@ -98,8 +99,8 @@
        
        .postUserInfo .profilePicContainer .profilePic {
         object-fit: cover;
-        max-height: 50px;
-        max-width: 75px;
+        height: 60px;
+        width: 60px;
         border: 0.5px solid;
         border-radius: 50%;
     }

@@ -1,5 +1,6 @@
 import ComentModel from "../models/comentModel.js";
 import sse from "../config/sse.js";
+import { getUserRole } from "./userController.js";
 
 const setComent = async (req, res) => {
   const text = req.body.text;
@@ -33,11 +34,13 @@ const deleteComent = async (req, res) => {
   const coment = await ComentModel.findOne({
     where: { id: req.body.comentId },
   });
+  const userRole = await getUserRole(req.user.id);
+  if (coment.userId == req.user.id || userRole == 1) {
+    await coment.destroy();
+    sse.send(coment, "deleteComent");
 
-  await coment.destroy();
-  sse.send(coment, "deleteComent");
-
-  res.status(200).json({ message: "commentaire supprimer" });
+    res.status(200).json({ message: "commentaire supprimer" });
+  } else res.sendStatus(403);
 };
 
 export { setComent, getComentsByPostId, deleteComent };

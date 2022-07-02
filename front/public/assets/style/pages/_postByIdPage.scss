@@ -3,6 +3,17 @@
     justify-content: space-around;
     background-color: #eaeaea;
     align-items: flex-start;
+    .profilContainer{
+        align-items: flex-start;
+     .profilCardInfo .profilCardPic {
+        object-fit: cover;
+        height: 90px;
+        width: 90px;
+        background-color: #fff;
+        border: 0.5px solid;
+        border-radius: 50%;
+    }
+}
 }
 .commentPostContainer{
     display: flex;

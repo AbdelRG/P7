@@ -26,9 +26,7 @@ const UsersPage = () => {
 
     const newData = JSON.parse(e.data);
 
-    const newArray = [newData, ...usersArray];
-
-    setUsersArray(newArray);
+    setUsersArray(usersArray.filter((user) => user.id !== newData.id));
   });
 
   const filter = (e) => {
@@ -36,13 +34,11 @@ const UsersPage = () => {
 
     if (keyword !== "") {
       const results = usersArray.filter((user) => {
-        return user.pseudo.toLowerCase().startsWith(keyword.toLowerCase());
-        // Use the toLowerCase() method to make it case-insensitive
+        return user.pseudo.toLowerCase().includes(keyword.toLowerCase());
       });
       setFoundUsers(results);
     } else {
       setFoundUsers(usersArray);
-      // If the text field is empty, show all users
     }
 
     setName(keyword);
@@ -63,7 +59,7 @@ const UsersPage = () => {
           />
         </InputGroup>
 
-        {foundUsers && foundUsers.length > 0
+        {foundUsers && name.length > 0
           ? foundUsers.map((element, i) => (
               <div className="containerUser" key={i}>
                 <UserInfo user={element} />

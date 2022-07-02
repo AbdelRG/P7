@@ -1,7 +1,8 @@
 import PostModel from "../models/postModel.js";
 import ComentModel from "../models/comentModel.js";
 import sse from "../config/sse.js";
-import Op from "sequelize";
+//import Op from "sequelize";
+import { getUserRole } from "./userController.js";
 const setPost = async (req, res) => {
   const title = req.body.title;
   const text = req.body.text;
@@ -78,7 +79,10 @@ const getDeletedPost = async (req, res) => {
     paranoid: false,
   });
   const response = post.filter((post) => post.deletedAt !== null);
-  res.status(200).send(response);
+  const userRole = await getUserRole(req.user.id);
+  if (userRole == 1) {
+    res.status(200).send(response);
+  } else res.sendStatus(403);
 };
 
 const restorePost = async (req, res) => {
@@ -86,10 +90,12 @@ const restorePost = async (req, res) => {
     where: { id: req.body.postId },
     paranoid: false,
   });
-
-  await post.restore();
-  sse.send(post, "restorePost");
-  res.status(200).send(post);
+  const userRole = await getUserRole(req.user.id);
+  if (userRole == 1) {
+    await post.restore();
+    sse.send(post, "restorePost");
+    res.status(200).send(post);
+  } else res.sendStatus(403);
 };
 
 const adminDeletePost = async (req, res) => {
@@ -97,13 +103,16 @@ const adminDeletePost = async (req, res) => {
     where: { id: req.body.postId },
     paranoid: false,
   });
-  const comments = await ComentModel.destroy({
-    where: { postId: req.body.postId },
-    force: true,
-  });
-  await post.destroy({ force: true });
-  sse.send(post, "adminDeletePost");
-  res.status(200).send(post);
+  const userRole = await getUserRole(req.user.id);
+  if (userRole == 1) {
+    const comments = await ComentModel.destroy({
+      where: { postId: req.body.postId },
+      force: true,
+    });
+    await post.destroy({ force: true });
+    sse.send(post, "adminDeletePost");
+    res.status(200).send(post);
+  } else res.sendStatus(403);
 };
 
 export {

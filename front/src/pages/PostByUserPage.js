@@ -30,7 +30,7 @@ const PostByUserPage = () => {
   return (
     <>
       <NavigationBar />
-      {posts}
+      <div className="postByUserPage">{posts}</div>
       <Footer />
     </>
   );

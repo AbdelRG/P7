@@ -42,18 +42,39 @@ const getAllUsers = async (req, res) => {
   const user = await UserModel.findAll({
     attributes: { exclude: ["password"] },
   });
-  res.status(200).send(user);
+  const userRole = await getUserRole(req.user.id);
+  console.log(userRole);
+  if (userRole == 1) {
+    res.status(200).send(user);
+  } else res.sendStatus(403);
+};
+
+const getUserRole = async (userId) => {
+  const user = await UserModel.findOne({
+    where: { id: userId },
+    attributes: { exclude: ["password"] },
+  });
+  return user.role;
 };
 
 const deleteUser = async (req, res) => {
   const user = await UserModel.findOne({
     where: { id: req.body.userId },
   });
+  const userRole = await getUserRole(req.user.id);
+  if (userRole == 1) {
+    await user.destroy({ force: true });
+    sse.send(user, "deleteUser");
 
-  await user.destroy({ force: true });
-  sse.send(user, "deleteUser");
-
-  res.status(200).json({ message: "utilisateur supprimer" });
+    res.status(200).json({ message: "utilisateur supprimer" });
+  } else res.sendStatus(403);
 };
 
-export { getUser, getUserById, updateUser, getAllUsers, deleteUser };
+export {
+  getUser,
+  getUserById,
+  updateUser,
+  getAllUsers,
+  deleteUser,
+  getUserRole,
+};

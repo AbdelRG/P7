@@ -1,7 +1,7 @@
 import React from "react";
 import SignupForm from "../components/SignupForm";
 import Logo from "../../public/assets/images/icon-left-font-monochrome-black.png";
-import { NavLink } from "react-bootstrap";
+
 import Footer from "../components/Footer";
 import LoginForm from "../components/LoginForm";
 

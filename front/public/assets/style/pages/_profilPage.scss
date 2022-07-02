@@ -1,8 +1,9 @@
 .profilPageContainer{
     background-color: #eaeaea;
-    min-height: 1000px;
+    
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     
     .userInfoContainer{
         display: flex;
@@ -22,7 +23,8 @@
             
             .profilePagePic{
                 object-fit: cover;
-                 max-height: 100px;
+                 height: 100px;
+                 width: 100px;
                  border-radius: 50%;
                  border: solid  0.5px;
                  background-color: white;
@@ -63,11 +65,15 @@
         display: flex;
     
         .userProfil {
-            align-items: center;
+            align-items: flex-start;
             margin-left: 0px;
             display: flex;
             flex-direction: column;
             margin-bottom: 30px;
+            .profilePagePic{
+                 height: 75px;
+                 width: 75px;
+            }
         }
 
       

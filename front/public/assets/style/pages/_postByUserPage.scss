@@ -1,19 +1,26 @@
+
+.postByUserPage{
+    flex-grow: 1;
+    background-color: #eaeaea;
 .postByUserPageContainer{
     display: flex;
     justify-content: center;
-    min-height: 1000px ;
-    padding-top: 50px;
-    background-color: #eaeaea;
     
+    padding-top: 50px;
+   
+    
+}
 }
 
 
 
 @media screen and (min-width:0px) and  (max-width: 425px) {
+    .postByUserPage{
+        flex-grow: 1;
     .postByUserPageContainer {
         min-width: 280px;
         margin : 0px;
-        min-height: 800px ;
+       
     .postContainer {
         min-width: 275px;
         
@@ -34,4 +41,5 @@
         }
     }
 }
+    }
 }

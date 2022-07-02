@@ -3,7 +3,8 @@
     justify-content: center;
    align-items: center;
     background-color: #eaeaea;
-    max-height: 825px;
+   
+    flex-grow: 1;
     .logo{
         width: 25%;
     height: 15%;
@@ -42,7 +43,8 @@
 
 
 @media screen and (min-width:0px) and  (max-width: 425px) {
-   .home{max-height: 825px;
+   .home{
+    flex-grow: 1;
     background-color: #eaeaea;
     justify-content: flex-start;
     align-items: flex-start;
